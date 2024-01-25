@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sprint Task 03</title>
+    <style>
+        .input p{
+            margin: 0 0 10px 0;
+            font-weight: normal;
+        }
+        p{
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .input input {
+            width: 150px;
+            height: 20px;
+            padding-left: 5px;
+        }
+        .input select{
+            height: 26px;
+            margin-left: 5px;
+            padding-left: 5px;
+        }
+        .forms {
+            display: flex;
+            margin-left: 15px;
+        }
+        .forms div {
+            margin-right: 15px;
+            width: 200px;
+        }
+        h4 {
+            background-color: #e9ecef;
+            margin: 0;
+            padding-left: 10px;
+            line-height: 26px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body style="padding: 10px">
+    <div style="display: flex">
+
+        <div class="input">
+            <p>Введите сумму:</p>
+            <input type="text" id="amount" onchange="change()">
+            <select id="currency" onchange="change()">
+                <option>KZT</option>
+                <option>USD</option>
+                <option>EUR</option>
+            </select>
+        </div>
+
+        <div class="forms">
+            <div>
+                <p>KZT (tenge)</p>
+                <h4 id = "kzt">-</h4>
+            </div>
+            <div>
+                <p>USD (dollar)</p>
+                <h4 id = "usd">-</h4>
+            </div>
+            <div>
+                <p>EUR (euro)</p>
+                <h4 id = "eur">-</h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function change() {
+            let input = parseInt(document.getElementById('amount').value)
+            let form = document.getElementById('currency').value
+            switch (form) {
+                case 'KZT':
+                    document.getElementById('kzt').innerText = '-'
+                    document.getElementById('usd').innerText = (input/448).toFixed( 3 ).slice(0, -1)
+                    document.getElementById('eur').innerText = (input/486).toFixed( 3 ).slice(0, -1)
+                    break
+                case 'USD':
+                    document.getElementById('usd').innerText = '-'
+                    document.getElementById('kzt').innerText = (input*448).toFixed( 3 ).slice(0, -1)
+                    document.getElementById('eur').innerText = (input*448/486).toFixed( 3 ).slice(0, -1)
+                    break
+                case 'EUR':
+                    document.getElementById('eur').innerText = '-'
+                    document.getElementById('kzt').innerText = (input*486).toFixed( 3 ).slice(0, -1)
+                    document.getElementById('usd').innerText = (input*486/448).toFixed( 3 ).slice(0, -1)
+                    break
+            }
+        }
+    </script>
+</body>
+</html>
